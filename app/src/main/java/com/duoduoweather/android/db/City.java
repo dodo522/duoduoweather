@@ -12,35 +12,35 @@ public class City extends LitePalSupport {
         private int cityCode;
         private int provinceId;
 
-        public int getId() {
-            return id;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public String getCityName() {
-            return cityName;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public int getCityCode(int id) {
-            return cityCode;
-        }
+    public String getCityName() {
+        return cityName;
+    }
 
-        public int getProvinceId() {
-            return provinceId;
-        }
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public int getCityCode() {
+        return cityCode;
+    }
 
-        public void setCityName(String cityName) {
-            this.cityName = cityName;
-        }
+    public void setCityCode(int cityCode) {
+        this.cityCode = cityCode;
+    }
 
-        public void setCityCode(int cityCode) {
-            this.cityCode = cityCode;
-        }
+    public int getProvinceId() {
+        return provinceId;
+    }
 
-        public void setProvinceId(int provinceId) {
-            this.provinceId = provinceId;
-        }
+    public void setProvinceId(int provinceId) {
+        this.provinceId = provinceId;
+    }
 }
