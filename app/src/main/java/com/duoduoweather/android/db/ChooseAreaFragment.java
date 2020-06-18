@@ -2,6 +2,7 @@ package com.duoduoweather.android.db;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duoduoweather.android.R;
+import com.duoduoweather.android.WeatherActivity;
 import com.duoduoweather.android.util.HttpUtil;
 import com.duoduoweather.android.util.Utility;
 
@@ -70,7 +72,7 @@ public class ChooseAreaFragment extends Fragment {
         mTextView = (TextView)view.findViewById(R.id.title_text);
         mBackButton  = (Button) view.findViewById(R.id.back_button);
         mListView = (ListView)view.findViewById(R.id.list_view);
-        mAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,mDataList);
+        mAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,mDataList);
         mListView.setAdapter(mAdapter);
         return view;
     }
@@ -89,6 +91,12 @@ public class ChooseAreaFragment extends Fragment {
                 {
                     selectedCity = mCityList.get(position);
                     queryCounties();
+                }else if(currentLevel == LEVEL_COUNTRY){
+                    String weatherId = mCountryList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -223,7 +231,7 @@ public class ChooseAreaFragment extends Fragment {
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        Toast.makeText(getContext(),"加载失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"加载失败",Toast.LENGTH_SHORT).show();
                     }
                 });
 

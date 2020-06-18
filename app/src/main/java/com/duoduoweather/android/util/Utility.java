@@ -1,10 +1,13 @@
 package com.duoduoweather.android.util;
 
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.duoduoweather.android.db.City;
 import com.duoduoweather.android.db.Country;
 import com.duoduoweather.android.db.Province;
+import com.duoduoweather.android.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,5 +83,24 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    /**
+     * 将返回的JSON数据解析成Weather实体
+     */
+
+    @Nullable
+    public static Weather handleWeatherResponse(String response)
+    {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            Weather weather = new Gson().fromJson(response,Weather.class);
+            return weather;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
